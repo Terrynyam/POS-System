@@ -53,4 +53,9 @@ public class UserAccountController {
                                                          Status status) {
         return userAccountService.getByStatus(status);
     }
+    @PutMapping("/{userId}/deactivate")
+    @Operation(description = "Deactivate User account")
+    public ResponseEntity<UserAccount> deactivateUserAccount(@PathVariable Long userId) {
+        return ResponseEntity.ok(userAccountService.deactivate(userId));
+    }
 }

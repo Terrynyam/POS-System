@@ -16,6 +16,7 @@ public interface UserAccountService {
 
     ResponseEntity<UserAccount> delete(Long id);
     UserAccount setApproval(Long userId);
+    UserAccount deactivate(Long userId);
     List<UserAccount> getByApprovalStatus(Boolean isApproved);
     List<UserAccount> getByStatus(Status status);
 }

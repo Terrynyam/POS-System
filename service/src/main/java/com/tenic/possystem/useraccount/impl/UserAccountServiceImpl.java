@@ -111,6 +111,14 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
+    public UserAccount deactivate(Long userId) {
+        UserAccount userAccount = userAccountRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("UserAccount not found"));
+        userAccount.setStatus(Status.DEACTIVATED);
+        return userAccountRepository.save(userAccount);
+    }
+
+    @Override
     public List<UserAccount> getByApprovalStatus(Boolean isApproved) {
         return userAccountRepository.findByIsApproved(isApproved);
     }
