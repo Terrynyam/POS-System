@@ -1,2 +1,42 @@
 server:
   port: 7400
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost\MSSQLSERVER:1433;database=pos_system;encrypt=true;trustServerCertificate=true
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: 'terry'
+
+  jpa:
+      hibernate:
+        ddl-auto: update
+        show-sql: true
+        format_sql: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/POS-System
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+keycloak:
+  token-uri: http://localhost:8080/realms/POS-System/protocol/openid-connect/token
+  grant-type: password
+  client-id: POS-System
+  admin-client-id: admin-cli
+  admin-username: admin
+  admin-password: "admin"
+  masterUrl: http://localhost:8080/realms/master/protocol/openid-connect/token
+  client-user-uri: http://localhost:8080/admin/realms/POS-System/users
+  client-uuid: 0ab27732-54af-4747-803d-58bb1007eadb
+
+default-user-password:
+  password: '123456'
+
+jwt:
+  auth:
+    converter:
+      resource-id: POS-System
+      principal-attribute: preferred_username
